@@ -236,38 +236,39 @@
                 <h1>Smart Home - Fan Control</h1>
                 <p>Simple fuzzy logic system to control fan based on temperature, light intensity, and time of day.</p>
                 <div class="code-wrapper">
-                    <pre><code># Simple Fuzzy Logic Smart Home Agent
+                    <pre><code>
+# Simple Fuzzy Logic Smart Home Agent
                     
-                    temperature = float(input("Enter temperature: "))
-                    light_intensity = float(input("Enter light intensity (0-100): "))
-                    time_of_day = input("Enter time of day (day/night): ").lower()
+temperature = float(input("Enter temperature: "))
+light_intensity = float(input("Enter light intensity (0-100): "))
+time_of_day = input("Enter time of day (day/night): ").lower()
                     
-                    # --- Fuzzy Temperature Levels ---
-                    if temperature < 20:
-                temp_level = "cold"
-                elif 20 <= temperature <= 30:
-                temp_level = "normal"
-                else:
-                temp_level = "hot"
+# --- Fuzzy Temperature Levels ---
+if temperature < 20:
+    temp_level = "cold"
+elif 20 <= temperature <= 30:
+    temp_level = "normal"
+else:
+    temp_level = "hot"
                 
-                # Fan Control (based on fuzzy temperature)
-                if temp_level == "hot":
-                fan = "ON"
-                elif temp_level == "normal":
-                fan = "LOW SPEED"
-                else:
-                fan = "OFF"
+# Fan Control (based on fuzzy temperature)
+if temp_level == "hot":
+    fan = "ON"
+elif temp_level == "normal":
+    fan = "LOW SPEED"
+else:
+    fan = "OFF"
                 
-                # Light Control (fuzzy + time)
-                if time_of_day == "night" and light_intensity < 50:
-                light = "ON"
-                else:
-                light = "OFF"
+# Light Control (fuzzy + time)
+if time_of_day == "night" and light_intensity < 50:
+    light = "ON"
+else:
+    light = "OFF"
                 
-                print("\n--- Smart Home Decisions ---")
-                print(f"Temperature Level: {temp_level}")
-                print(f"Fan: {fan}")
-                print(f"Light: {light}")</code></pre>
+print("\n--- Smart Home Decisions ---")
+print(f"Temperature Level: {temp_level}")
+print(f"Fan: {fan}")
+print(f"Light: {light}")</code></pre>
                 </div>
             </div>
 
@@ -276,20 +277,24 @@
                 <h1>Smart Home - Heater Control</h1>
                 <p>Intelligent heater control system based on temperature, season, and time of day.</p>
                 <div class="code-wrapper">
-                    <pre><code># Smart Home Agent to control Heater
+                    <pre><code>
+# Smart Home Agent to control Heater
+
+temperature = float(input("Enter temperature (°C): "))
+season = input("Enter season (summer/winter/rainy): ").lower()
+time_of_day = input("Enter time of day (day/night): ").lower()
                     
-                    temperature = float(input("Enter temperature (°C): "))
-                    season = input("Enter season (summer/winter/rainy): ").lower()
-                    time_of_day = input("Enter time of day (day/night): ").lower()
+# Heater Control Logic
+
+if season == "winter" and temperature < 18 and time_of_day == "night":
+        heater = "ON"
+else:
+        heater = "OFF"
                     
-                    # Heater Control Logic
-                    if season == "winter" and temperature < 18 and time_of_day == "night":
-                    heater = "ON"
-                    else:
-                    heater = "OFF"
-                    
-                    print("\n--- Smart Home Heater Decision ---")
-                    print(f"Heater: {heater}")</code></pre>
+print("\n--- Smart Home Heater Decision ---")
+print(f"Heater: {heater}")
+
+                </code></pre>
                 </div>
             </div>
 
@@ -298,65 +303,75 @@
                 <h1>A* Pathfinding Algorithm</h1>
                 <p>A* algorithm for finding the shortest path on a 2D grid with obstacles.</p>
                 <div class="code-wrapper">
-                    <pre><code># astar_grid.py
-                        # A* pathfinding on a 2D grid with obstacles. Returns path as list of (r,c).
-                        
-                        import heapq
-                        
-                        def astar(grid, start, goal):
-                        rows, cols = len(grid), len(grid[0])
-                        def neighbors(node):
-                        r, c = node
-                        for dr, dc in ((1,0),(-1,0),(0,1),(0,-1)):
-                        nr, nc = r+dr, c+dc
-                        if 0 <= nr < rows and 0 <= nc < cols and grid[nr][nc] == 0:
-                        yield (nr, nc)
-                        
-                        def heuristic(a, b):
-                        # Manhattan distance
-                        return abs(a[0]-b[0]) + abs(a[1]-b[1])
-                        
-                        open_heap = []
-                        heapq.heappush(open_heap, (heuristic(start, goal), 0, start))
-                        came_from = {start: None}
-                        g_score = {start: 0}
-                        
-                        while open_heap:
-                        _, g, current = heapq.heappop(open_heap)
-                        if current == goal:
-                        # reconstruct path
-                        path = []
-                        while current:
-                        path.append(current)
-                        current = came_from[current]
-                        path.reverse()
-                        return path
-                        
-                        for nbr in neighbors(current):
-                        tentative_g = g_score[current] + 1
-                        if nbr not in g_score or tentative_g < g_score[nbr]:
-                        g_score[nbr] = tentative_g
-                        f = tentative_g + heuristic(nbr, goal)
-                        heapq.heappush(open_heap, (f, tentative_g, nbr))
-                        came_from[nbr] = current
-                        return None  # no path
-                        
-                        if __name__ == "__main__":
-                        # 0 = free, 1 = obstacle
-                        grid = [
-                        [0,0,0,0,1],
-                        [0,1,0,0,0],
-                        [0,1,0,1,0],
-                        [0,0,0,1,0],
-                        [1,1,0,0,0],
-                        ]
-                        start = (0,0)
-                        goal = (4,4)
-                        path = astar(grid, start, goal)
-                        if path:
-                        print("Path found:", path)
-                        else:
-                        print("No path found")</code></pre>
+                    <pre><code>
+# astar_grid.py
+# A* pathfinding on a 2D grid with obstacles. Returns path as list of (r,c).
+
+import heapq
+
+def astar(grid, start, goal):
+    rows, cols = len(grid), len(grid[0])
+
+    def neighbors(node):
+        r, c = node
+        for dr, dc in ((1,0),(-1,0),(0,1),(0,-1)):
+            nr, nc = r + dr, c + dc
+            if 0 <= nr < rows and 0 <= nc < cols and grid[nr][nc] == 0:
+                yield (nr, nc)
+
+    def heuristic(a, b):
+        # Manhattan distance
+        return abs(a[0] - b[0]) + abs(a[1] - b[1])
+
+    open_heap = []
+    heapq.heappush(open_heap, (heuristic(start, goal), 0, start))
+    came_from = {start: None}
+    g_score = {start: 0}
+
+    while open_heap:
+        _, g, current = heapq.heappop(open_heap)
+
+        if current == goal:
+            # reconstruct path
+            path = []
+            while current:
+                path.append(current)
+                current = came_from[current]
+            path.reverse()
+            return path
+
+        for nbr in neighbors(current):
+            tentative_g = g_score[current] + 1
+            if nbr not in g_score or tentative_g < g_score[nbr]:
+                g_score[nbr] = tentative_g
+                f = tentative_g + heuristic(nbr, goal)
+                heapq.heappush(open_heap, (f, tentative_g, nbr))
+                came_from[nbr] = current
+
+    return None  # no path
+
+
+if __name__ == "__main__":
+    # 0 = free, 1 = obstacle
+    grid = [
+        [0,0,0,0,1],
+        [0,1,0,0,0],
+        [0,1,0,1,0],
+        [0,0,0,1,0],
+        [1,1,0,0,0],
+    ]
+
+    start = (0, 0)
+    goal = (4, 4)
+
+    path = astar(grid, start, goal)
+    if path:
+        print("Path found:", path)
+    else:
+        print("No path found")
+
+                    
+                    </code></pre>
                 </div>
             </div>
 
@@ -365,59 +380,68 @@
                 <h1>Greedy Best-First Search</h1>
                 <p>Greedy Best-First Search algorithm using Manhattan heuristic for pathfinding.</p>
                 <div class="code-wrapper">
-                    <pre><code># greedy_bfs_grid.py
-                            # Greedy Best-First Search on a grid using Manhattan heuristic.
-                            
-                            import heapq
-                            
-                            def greedy_best_first(grid, start, goal):
-                            rows, cols = len(grid), len(grid[0])
-                            def neighbors(node):
-                            r, c = node
-                            for dr, dc in ((1,0),(-1,0),(0,1),(0,-1)):
-                            nr, nc = r+dr, c+dc
-                            if 0 <= nr < rows and 0 <= nc < cols and grid[nr][nc] == 0:
-                            yield (nr, nc)
-                            
-                            def heuristic(a, b):
-                            return abs(a[0]-b[0]) + abs(a[1]-b[1])
-                            
-                            open_heap = []
-                            heapq.heappush(open_heap, (heuristic(start, goal), start))
-                            came_from = {start: None}
-                            visited = set([start])
-                            
-                            while open_heap:
-                            _, current = heapq.heappop(open_heap)
-                            if current == goal:
-                            path = []
-                            while current:
-                            path.append(current)
-                            current = came_from[current]
-                            return list(reversed(path))
-                            
-                            for nbr in neighbors(current):
-                            if nbr not in visited:
-                            visited.add(nbr)
-                            came_from[nbr] = current
-                            heapq.heappush(open_heap, (heuristic(nbr, goal), nbr))
-                            return None
-                            
-                            if __name__ == "__main__":
-                            grid = [
-                            [0,0,0,0,1],
-                            [0,1,0,0,0],
-                            [0,1,0,1,0],
-                            [0,0,0,1,0],
-                            [1,1,0,0,0],
-                            ]
-                            start = (0,0)
-                            goal = (4,4)
-                            path = greedy_best_first(grid, start, goal)
-                            if path:
-                            print("Path found by Greedy BFS:", path)
-                            else:
-                            print("No path found")</code></pre>
+                    <pre><code>
+# greedy_bfs_grid.py
+# Greedy Best-First Search on a grid using Manhattan heuristic.
+
+import heapq
+
+def greedy_best_first(grid, start, goal):
+    rows, cols = len(grid), len(grid[0])
+
+    def neighbors(node):
+        r, c = node
+        for dr, dc in ((1,0), (-1,0), (0,1), (0,-1)):
+            nr, nc = r + dr, c + dc
+            if 0 <= nr < rows and 0 <= nc < cols and grid[nr][nc] == 0:
+                yield (nr, nc)
+
+    def heuristic(a, b):
+        return abs(a[0] - b[0]) + abs(a[1] - b[1])
+
+    open_heap = []
+    heapq.heappush(open_heap, (heuristic(start, goal), start))
+    came_from = {start: None}
+    visited = {start}
+
+    while open_heap:
+        _, current = heapq.heappop(open_heap)
+
+        if current == goal:
+            path = []
+            while current:
+                path.append(current)
+                current = came_from[current]
+            return list(reversed(path))
+
+        for nbr in neighbors(current):
+            if nbr not in visited:
+                visited.add(nbr)
+                came_from[nbr] = current
+                heapq.heappush(open_heap, (heuristic(nbr, goal), nbr))
+
+    return None  # no path found
+
+
+if __name__ == "__main__":
+    grid = [
+        [0,0,0,0,1],
+        [0,1,0,0,0],
+        [0,1,0,1,0],
+        [0,0,0,1,0],
+        [1,1,0,0,0],
+    ]
+
+    start = (0,0)
+    goal = (4,4)
+
+    path = greedy_best_first(grid, start, goal)
+    if path:
+        print("Path found by Greedy BFS:", path)
+    else:
+        print("No path found")
+                      
+                        </code></pre>
                 </div>
             </div>
 
@@ -426,63 +450,67 @@
                 <h1>N-Queens Problem</h1>
                 <p>Classic N-Queens problem solved using backtracking algorithm.</p>
                 <div class="code-wrapper">
-                    <pre><code># N-Queens Problem using Backtracking
-                                
-                                def is_safe(board, row, col, n):
-                                # Check column
-                                for i in range(row):
-                                if board[i] == col:
-                                return False
-                                
-                                # Check left diagonal
-                                for i, j in zip(range(row-1, -1, -1), range(col-1, -1, -1)):
-                                if board[i] == j:
-                                return False
-                                
-                                # Check right diagonal
-                                for i, j in zip(range(row-1, -1, -1), range(col+1, n)):
-                                if board[i] == j:
-                                return False
-                                
-                                return True
-                                
-                                
-                                def solve_nqueens(n, row, board, solutions):
-                                if row == n:
-                                solutions.append(board[:])
-                                return
-                                
-                                for col in range(n):
-                                if is_safe(board, row, col, n):
-                                board[row] = col
-                                solve_nqueens(n, row + 1, board, solutions)
-                                board[row] = -1  # backtrack
-                                
-                                
-                                def print_board(solution, n):
-                                print("\n--- N-Queens Solution ---")
-                                for row in solution:
-                                line = ""
-                                for col in range(n):
-                                if col == row:
-                                line += " Q "
-                                else:
-                                line += " . "
-                                print(line)
-                                
-                                
-                                # MAIN
-                                n = 6  # You can change N
-                                board = [-1] * n
-                                solutions = []
-                                
-                                solve_nqueens(n, 0, board, solutions)
-                                
-                                if solutions:
-                                print("Number of solutions:", len(solutions))
-                                print_board(solutions[0], n)
-                                else:
-                                print("No solution exists")</code></pre>
+                    <pre><code>          
+# N-Queens Problem using Backtracking
+
+def is_safe(board, row, col, n):
+    # Check column
+    for i in range(row):
+        if board[i] == col:
+            return False
+
+    # Check left diagonal
+    for i, j in zip(range(row - 1, -1, -1), range(col - 1, -1, -1)):
+        if board[i] == j:
+            return False
+
+    # Check right diagonal
+    for i, j in zip(range(row - 1, -1, -1), range(col + 1, n)):
+        if board[i] == j:
+            return False
+
+    return True
+
+
+def solve_nqueens(n, row, board, solutions):
+    if row == n:
+        solutions.append(board[:])
+        return
+
+    for col in range(n):
+        if is_safe(board, row, col, n):
+            board[row] = col
+            solve_nqueens(n, row + 1, board, solutions)
+            board[row] = -1  # backtrack
+
+
+def print_board(solution, n):
+    print("\n--- N-Queens Solution ---")
+    for row in solution:
+        line = ""
+        for col in range(n):
+            if col == row:
+                line += " Q "
+            else:
+                line += " . "
+        print(line)
+
+
+# MAIN
+n = 6  # You can change N
+board = [-1] * n
+solutions = []
+
+solve_nqueens(n, 0, board, solutions)
+
+if solutions:
+    print("Number of solutions:", len(solutions))
+    print_board(solutions[0], n)
+else:
+    print("No solution exists")
+
+                            
+                            </code></pre>
                 </div>
             </div>
 
@@ -491,42 +519,46 @@
                 <h1>Medical Diagnosis System</h1>
                 <p>Knowledge-based inference engine for medical diagnosis based on symptoms.</p>
                 <div class="code-wrapper">
-                    <pre><code># Knowledge Base
-                                    knowledge_base = {
-                                        "fever and cough": "Common Cold",
-                                        "fever and rash": "Measles",
-                                        "headache and nausea": "Migraine",
-                                        "chest pain and shortness of breath": "Heart Problem",
-                                        "fever and sore throat": "Throat Infection",
-                                        "fatigue and weight loss": "Diabetes",
-                                    }
-                                    
-                                    # --- Inference Engine ---
-                                    def infer_disease(symptoms):
-                                    # Convert input symptoms to lowercase for matching
-                                    symptoms = symptoms.lower()
-                                    
-                                    for rule, disease in knowledge_base.items():
-                                    # Check if all rule symptoms exist in user input
-                                    if all(symptom in symptoms for symptom in rule.split(" and ")):
-                                    return disease
-                                    
-                                    return "Unknown condition – please consult a doctor."
-                                    
-                                    # --- Main Program ---
-                                    print("Simple Medical Diagnosis System")
-                                    print("Enter symptoms separated by 'and' (e.g., 'fever and cough')")
-                                    print("Type 'q' to quit.\n")
-                                    
-                                    while True:
-                user_input = input("Enter symptoms: ").strip().lower()
-                
-                if user_input == "q":
-                print("Exiting system. Stay healthy!")
-                break
-                
-                diagnosis = infer_disease(user_input)
-                print(f"Diagnosis → {diagnosis}\n")</code></pre>
+                    <pre><code>          
+# Knowledge Base
+knowledge_base = {
+    "fever and cough": "Common Cold",
+    "fever and rash": "Measles",
+    "headache and nausea": "Migraine",
+    "chest pain and shortness of breath": "Heart Problem",
+    "fever and sore throat": "Throat Infection",
+    "fatigue and weight loss": "Diabetes",
+}
+
+# --- Inference Engine ---
+def infer_disease(symptoms):
+    # Convert input symptoms to lowercase for matching
+    symptoms = symptoms.lower()
+
+    for rule, disease in knowledge_base.items():
+        # Check if all rule symptoms exist in user input
+        if all(symptom in symptoms for symptom in rule.split(" and ")):
+            return disease
+
+    return "Unknown condition – please consult a doctor."
+
+# --- Main Program ---
+print("Simple Medical Diagnosis System")
+print("Enter symptoms separated by 'and' (e.g., 'fever and cough')")
+print("Type 'q' to quit.\n")
+
+while True:
+    user_input = input("Enter symptoms: ").strip().lower()
+
+    if user_input == "q":
+        print("Exiting system. Stay healthy!")
+        break
+
+    diagnosis = infer_disease(user_input)
+    print(f"Diagnosis → {diagnosis}\n")
+
+
+                    </code></pre>
                 </div>
             </div>
 
@@ -535,27 +567,30 @@
                 <h1>Government Scheme Eligibility</h1>
                 <p>Rule-based system to check eligibility for government schemes.</p>
                 <div class="code-wrapper">
-                    <pre><code># Government Scheme Eligibility Checker
+                    <pre><code>
+# Government Scheme Eligibility Checker
                     
-                    # Inputs
-                    age = int(input("Enter age: "))
-                    income = float(input("Enter annual income: "))
-                    region = input("Enter your region: ").lower()
-                    education = input("Enter education (primary/high school/graduate): ").lower()
+# Inputs
+age = int(input("Enter age: "))
+income = float(input("Enter annual income: "))
+region = input("Enter your region: ").lower()
+education = input("Enter education (primary/high school/graduate): ").lower()
                     
-                    # Predefined eligible regions
-                    eligible_regions = ["pune", "mumbai", "nagpur", "nashik"]
+# Predefined eligible regions
+eligible_regions = ["pune", "mumbai", "nagpur", "nashik"]
                     
-                    # Eligibility Logic
-                    if age >= 18 and income < 200000 and region in eligible_regions and education in ["high school", "graduate"]:
-                    result = "Eligible"
-                    elif age >= 18 and region in eligible_regions:
-                    result = "Conditionally Eligible"
-                    else:
-                    result = "Not Eligible"
+# Eligibility Logic
+if age >= 18 and income < 200000 and region in eligible_regions and education in ["high school", "graduate"]:
+    result = "Eligible"
+elif age >= 18 and region in eligible_regions:
+    result = "Conditionally Eligible"
+else:
+    result = "Not Eligible"
                     
-                    print("\n--- Eligibility Result ---")
-                    print("You are:", result)</code></pre>
+print("\n--- Eligibility Result ---")
+print("You are:", result)
+
+</code></pre>
                 </div>
             </div>
 
@@ -564,89 +599,94 @@
                 <h1>Tic-Tac-Toe AI</h1>
                 <p>Rule-based AI for playing Tic-Tac-Toe with win and block strategies.</p>
                 <div class="code-wrapper">
-                    <pre><code># Simple Rule-Based Tic-Tac-Toe AI
-                        
-                        def print_board(board):
-                        print("\nBoard:")
-                        for row in board:
-                        print(row)
-                        
-                        def check_win(b, p):
-                        # Check rows, columns, diagonals
-                        return (
-                            (b[0][0] == b[0][1] == b[0][2] == p) or
-                            (b[1][0] == b[1][1] == b[1][2] == p) or
-                            (b[2][0] == b[2][1] == b[2][2] == p) or
-                            (b[0][0] == b[1][0] == b[2][0] == p) or
-                            (b[0][1] == b[1][1] == b[2][1] == p) or
-                            (b[0][2] == b[1][2] == b[2][2] == p) or
-                            (b[0][0] == b[1][1] == b[2][2] == p) or
-                            (b[0][2] == b[1][1] == b[2][0] == p)
-                            )
-                            
-                            def ai_move(board):
-                            # 1) If AI can win, play winning move
-                            for r in range(3):
-                            for c in range(3):
-                            if board[r][c] == " ":
-                            board[r][c] = "O"
-                            if check_win(board, "O"):
-                            return
-                            board[r][c] = " "
-                            
-                            # 2) If player can win next, block
-                            for r in range(3):
-                            for c in range(3):
-                            if board[r][c] == " ":
-                            board[r][c] = "X"
-                            if check_win(board, "X"):
-                            board[r][c] = "O"
-                            return
-                            board[r][c] = " "
-                            
-                            # 3) Otherwise pick first empty cell
-                            for r in range(3):
-                            for c in range(3):
-                            if board[r][c] == " ":
-                            board[r][c] = "O"
-                            return
-                            
-                            # MAIN PROGRAM
-                            board = [[" "]*3 for _ in range(3)]
-                            
-                            print("Tic-Tac-Toe (X = Player, O = AI)\n")
-                            
-                            while True:
-                            print_board(board)
-                            
-                            # Player move
-                            r = int(input("Row (0-2): "))
-                            c = int(input("Col (0-2): "))
-                            
-                            if board[r][c] != " ":
-                            print("Invalid move\n")
-                            continue
-                            
-                            board[r][c] = "X"
-                            
-                            if check_win(board, "X"):
-                            print_board(board)
-                            print("You WIN!")
-                            break
-                            
-                            # AI move
-                            ai_move(board)
-                            
-                            if check_win(board, "O"):
-                            print_board(board)
-                            print("AI WINS!")
-                            break
-                            
-                            # Draw
-                            if all(board[r][c] != " " for r in range(3) for c in range(3)):
-                            print_board(board)
-                            print("DRAW!")
-                            break</code></pre>
+                    <pre><code>
+# Simple Rule-Based Tic-Tac-Toe AI
+
+def print_board(board):
+    print("\nBoard:")
+    for row in board:
+        print(row)
+
+def check_win(b, p):
+    # Check rows, columns, diagonals
+    return (
+        (b[0][0] == b[0][1] == b[0][2] == p) or
+        (b[1][0] == b[1][1] == b[1][2] == p) or
+        (b[2][0] == b[2][1] == b[2][2] == p) or
+        (b[0][0] == b[1][0] == b[2][0] == p) or
+        (b[0][1] == b[1][1] == b[2][1] == p) or
+        (b[0][2] == b[1][2] == b[2][2] == p) or
+        (b[0][0] == b[1][1] == b[2][2] == p) or
+        (b[0][2] == b[1][1] == b[2][0] == p)
+    )
+
+def ai_move(board):
+    # 1) If AI can win, play winning move
+    for r in range(3):
+        for c in range(3):
+            if board[r][c] == " ":
+                board[r][c] = "O"
+                if check_win(board, "O"):
+                    return
+                board[r][c] = " "
+
+    # 2) If player can win next, block
+    for r in range(3):
+        for c in range(3):
+            if board[r][c] == " ":
+                board[r][c] = "X"
+                if check_win(board, "X"):
+                    board[r][c] = "O"
+                    return
+                board[r][c] = " "
+
+    # 3) Otherwise pick first empty cell
+    for r in range(3):
+        for c in range(3):
+            if board[r][c] == " ":
+                board[r][c] = "O"
+                return
+
+
+# MAIN PROGRAM
+board = [[" "] * 3 for _ in range(3)]
+
+print("Tic-Tac-Toe (X = Player, O = AI)\n")
+
+while True:
+    print_board(board)
+
+    # Player move
+    r = int(input("Row (0-2): "))
+    c = int(input("Col (0-2): "))
+
+    if board[r][c] != " ":
+        print("Invalid move\n")
+        continue
+
+    board[r][c] = "X"
+
+    if check_win(board, "X"):
+        print_board(board)
+        print("You WIN!")
+        break
+
+    # AI move
+    ai_move(board)
+
+    if check_win(board, "O"):
+        print_board(board)
+        print("AI WINS!")
+        break
+
+    # Draw
+    if all(board[r][c] != " " for r in range(3) for c in range(3)):
+        print_board(board)
+        print("DRAW!")
+        break
+
+
+                    </code></pre>
                 </div>
             </div>
 
@@ -655,53 +695,60 @@
                 <h1>Fuzzy Fan Speed Control</h1>
                 <p>Fuzzy logic system for controlling fan speed based on temperature.</p>
                 <div class="code-wrapper">
-                    <pre><code># Fuzzy Fan Speed Control based on Temperature
+                    <pre><code>
+# Fuzzy Fan Speed Control based on Temperature
+
+def low_temp(temp):
+    if temp <= 20: return 1
+    if 20 < temp < 30: return (30 - temp) / 10
+    return 0
                                 
-                                def low_temp(t):
-                                if t <= 20: return 1
-                                if 20 < t < 30: return (30 - t) / 10
-                                return 0
-                                
-                                def medium_temp(t):
-                                if 20 < t < 30: return (t - 20) / 10
-                                if 30 <= t <= 40: return (40 - t) / 10
-                                return 0
-                                
-                                def high_temp(t):
-                                if t <= 30: return 0
-                                if 30 < t < 40: return (t - 30) / 10
-                                if t >= 40: return 1
-                                
-                                # Rule base:
-                                # IF temp is LOW → Fan = LOW
-                                # IF temp is MEDIUM → Fan = MEDIUM
-                                # IF temp is HIGH → Fan = HIGH
-                                
-                                def fuzzy_fan_speed(t):
-                                low = low_temp(t)
-                                medium = medium_temp(t)
-                                high = high_temp(t)
-                                
-                                print("\n--- Fuzzy Membership Values ---")
-                                print(f"Low Temp Membership    = {low:.2f}")
-                                print(f"Medium Temp Membership = {medium:.2f}")
-                                print(f"High Temp Membership   = {high:.2f}")
-                                
-                                # Defuzzification (Simple Winner-Takes-All)
-                                max_value = max(low, medium, high)
-                                
-                                if max_value == low:
-                                return "FAN SPEED: LOW"
-                                elif max_value == medium:
-                                return "FAN SPEED: MEDIUM"
-                                else:
-                                return "FAN SPEED: HIGH"
-                                
-                                
-                                # MAIN
-                                temp = float(input("Enter Temperature: "))
-                                result = fuzzy_fan_speed(temp)
-                                print("\n>>>", result)</code></pre>
+def medium_temp(temp):
+    if 20 < temp < 30:
+            return (temp - 20) / 10
+    if 30 <= temp <= 40:
+            return (40 - temp) / 10
+    return 0
+
+def high_temp(temp):
+    if temp <= 30:
+            return 0
+    if 30 < temp < 40:
+            return (temp - 30) / 10
+    if temp >= 40:
+            return 1
+
+# Rule base:
+# IF temp is LOW → Fan = LOW
+# IF temp is MEDIUM → Fan = MEDIUM
+# IF temp is HIGH → Fan = HIGH
+
+def fuzzy_fan_speed(temp):
+    low = low_temp(temp)
+    medium = medium_temp(temp)
+    high = high_temp(temp)
+
+    print("\n--- Fuzzy Membership Values ---")
+    print(f"Low Temp Membership    = {low:.2f}")
+    print(f"Medium Temp Membership = {medium:.2f}")
+    print(f"High Temp Membership   = {high:.2f}")
+
+# Defuzzification (Simple Winner-Takes-All)
+    max_value = max(low, medium, high)
+
+    if max_value == low:
+            return "FAN SPEED: LOW"
+    elif max_value == medium:
+            return "FAN SPEED: MEDIUM"
+    else:
+            return "FAN SPEED: HIGH"
+
+# MAIN
+temp = float(input("Enter Temperature: "))
+result = fuzzy_fan_speed(temp)
+print("\n>>>", result)
+                                        
+                    </code></pre>
                 </div>
             </div>
 
@@ -710,82 +757,85 @@
                 <h1>Genetic Algorithm</h1>
                 <p>Genetic algorithm for optimization with constraint handling.</p>
                 <div class="code-wrapper">
-                    <pre><code>import random
-                                    import math
-                                    
-                                    # --- GA PARAMETERS ---
-                                    POP_SIZE = 10
-                                    GENS = 10
-                                    CHROMO_LEN = 14   # 7 bits for x, 7 bits for y
-                                    MUTATION_RATE = 0.01
-                                    
-                                    # --- Binary Encoding / Decoding ---
-                                    def decode(chromo):
-                x_bits = chromo[:7]
-                y_bits = chromo[7:]
-                x = int(x_bits, 2)
-                y = int(y_bits, 2)
-                return x, y
-                
-                # --- Fitness Function with Penalty for Constraint (x+y ≤120) ---
-                def fitness(chromo):
-                x, y = decode(chromo)
-                if x + y > 120:
-                return -999999   # heavy penalty
-                return math.sin(x) * math.cos(y)
-                
-                # --- Selection (Tournament) ---
-                def selection(pop):
-                a = random.choice(pop)
-                b = random.choice(pop)
-                return a if fitness(a) > fitness(b) else b
-                
-                # --- Single-point Crossover ---
-                def crossover(p1, p2):
-                point = random.randint(1, CHROMO_LEN - 1)
-                child1 = p1[:point] + p2[point:]
-                child2 = p2[:point] + p1[point:]
-                return child1, child2
-                
-                # --- Mutation ---
-                def mutate(chromo):
-                new = ""
-                for bit in chromo:
-                if random.random() < MUTATION_RATE:
-                new += "1" if bit == "0" else "0"
-                else:
-                new += bit
-                return new
-                
-                # --- Initialize Random Population ---
-                def random_chromosome():
-                return "".join(random.choice("01") for _ in range(CHROMO_LEN))
-                
-                population = [random_chromosome() for _ in range(POP_SIZE)]
-                
-                # --- GA MAIN LOOP ---
-                for gen in range(GENS):
-                new_pop = []
-                
-                while len(new_pop) < POP_SIZE:
-                parent1 = selection(population)
-                parent2 = selection(population)
-                
-                child1, child2 = crossover(parent1, parent2)
-                
-                child1 = mutate(child1)
-                child2 = mutate(child2)
-                
-                new_pop.append(child1)
-                if len(new_pop) < POP_SIZE:
-                new_pop.append(child2)
-                
-                population = new_pop
-                
-                # Find best in this generation
-                best = max(population, key=fitness)
-                bx, by = decode(best)
-                print(f"Generation {gen+1}: Best = x={bx}, y={by}, fitness={fitness(best):.4f}")</code></pre>
+                    <pre><code>        
+import random
+import math
+
+# --- GA PARAMETERS ---
+POP_SIZE = 10
+GENS = 10
+CHROMO_LEN = 14   # 7 bits for x, 7 bits for y
+MUTATION_RATE = 0.01
+
+# --- Binary Encoding / Decoding ---
+def decode(chromo):
+    x_bits = chromo[:7]
+    y_bits = chromo[7:]
+    x = int(x_bits, 2)
+    y = int(y_bits, 2)
+    return x, y
+
+# --- Fitness Function with Penalty for Constraint (x+y ≤ 120) ---
+def fitness(chromo):
+    x, y = decode(chromo)
+    if x + y > 120:
+        return -999999   # heavy penalty
+    return math.sin(x) * math.cos(y)
+
+# --- Selection (Tournament) ---
+def selection(pop):
+    a = random.choice(pop)
+    b = random.choice(pop)
+    return a if fitness(a) > fitness(b) else b
+
+# --- Single-point Crossover ---
+def crossover(p1, p2):
+    point = random.randint(1, CHROMO_LEN - 1)
+    child1 = p1[:point] + p2[point:]
+    child2 = p2[:point] + p1[point:]
+    return child1, child2
+
+# --- Mutation ---
+def mutate(chromo):
+    new = ""
+    for bit in chromo:
+        if random.random() < MUTATION_RATE:
+            new += "1" if bit == "0" else "0"
+        else:
+            new += bit
+    return new
+
+# --- Initialize Random Population ---
+def random_chromosome():
+    return "".join(random.choice("01") for _ in range(CHROMO_LEN))
+
+population = [random_chromosome() for _ in range(POP_SIZE)]
+
+# --- GA MAIN LOOP ---
+for gen in range(GENS):
+    new_pop = []
+
+    while len(new_pop) < POP_SIZE:
+        parent1 = selection(population)
+        parent2 = selection(population)
+
+        child1, child2 = crossover(parent1, parent2)
+
+        child1 = mutate(child1)
+        child2 = mutate(child2)
+
+        new_pop.append(child1)
+        if len(new_pop) < POP_SIZE:
+            new_pop.append(child2)
+
+    population = new_pop
+
+    # Find best in this generation
+    best = max(population, key=fitness)
+    bx, by = decode(best)
+    print(f"Generation {gen+1}: Best = x={bx}, y={by}, fitness={fitness(best):.4f}")
+            
+                    </code></pre>
                 </div>
             </div>
 
@@ -795,44 +845,47 @@
                 <p>Knowledge-based system for predicting diseases including Tuberculosis, Covid-19, and Heart Disease.
                 </p>
                 <div class="code-wrapper">
-                    <pre><code># Simple Knowledge-Based Medical Diagnosis System
-                    # Diseases: Tuberculosis, Covid-19, Heart Disease
-                    
-                    # ---------- KNOWLEDGE BASE ----------
-                    knowledge_base = {
-                        "fever and cough and weight_loss": "Tuberculosis",
-                        "fever and dry_cough and breathing_problem": "Covid-19",
-                        "chest_pain and shortness_of_breath and fatigue": "Heart Disease"
-                    }
-                    
-                    # ---------- INFERENCE ENGINE ----------
-                    def infer_disease(symptoms):
-                    symptoms = symptoms.lower().replace(" ", "_")
-                    
-                    for rule, disease in knowledge_base.items():
-                    rule_symptoms = rule.split(" and ")
-                    
-                    # Check if ALL symptoms in rule are present
-                    if all(s in symptoms for s in rule_symptoms):
-                    return disease
-                    
-                    return "Unknown condition – please consult a doctor."
-                    
-                    # ---------- MAIN PROGRAM ----------
-                    print("Disease Prediction System")
-                    print("Enter symptoms separated by 'and'")
-                    print("Example: fever and cough and weight loss")
-                    print("Type 'q' to quit.\n")
-                    
-                    while True:
-                    user_in = input("Enter symptoms: ").lower().strip()
-                    
-                    if user_in == "q":
-                    print("Exiting… Stay healthy!")
-                    break
-                    
-                    diagnosis = infer_disease(user_in)
-                    print(f"Diagnosis → {diagnosis}\n")</code></pre>
+                    <pre><code>            
+# Simple Knowledge-Based Medical Diagnosis System
+# Diseases: Tuberculosis, Covid-19, Heart Disease
+
+# ---------- KNOWLEDGE BASE ----------
+knowledge_base = {
+    "fever and cough and weight_loss": "Tuberculosis",
+    "fever and dry_cough and breathing_problem": "Covid-19",
+    "chest_pain and shortness_of_breath and fatigue": "Heart Disease"
+}
+
+# ---------- INFERENCE ENGINE ----------
+def infer_disease(symptoms):
+    symptoms = symptoms.lower().replace(" ", "_")
+
+    for rule, disease in knowledge_base.items():
+        rule_symptoms = rule.split(" and ")
+
+        # Check if ALL symptoms in rule are present
+        if all(s in symptoms for s in rule_symptoms):
+            return disease
+
+    return "Unknown condition – please consult a doctor."
+
+# ---------- MAIN PROGRAM ----------
+print("Disease Prediction System")
+print("Enter symptoms separated by 'and'")
+print("Example: fever and cough and weight loss")
+print("Type 'q' to quit.\n")
+
+while True:
+    user_in = input("Enter symptoms: ").lower().strip()
+
+    if user_in == "q":
+        print("Exiting… Stay healthy!")
+        break
+
+    diagnosis = infer_disease(user_in)
+    print(f"Diagnosis → {diagnosis}\n")
+                
+                    </code></pre>
                 </div>
             </div>
 
@@ -842,54 +895,55 @@
                 <p>Fuzzy logic controller for air conditioner speed based on temperature.</p>
                 <div class="code-wrapper">
                     <pre><code>
-                    # Fuzzy AC Speed Control based on Temperature
+# Fuzzy AC Speed Control based on Temperature
             
-                    # --- Membership Functions ---
-                    def low_temp(t):
-                    if t <= 18: return 1
-                    if 18 < t < 25: return (25 - t) / 7
-                    return 0
+# --- Membership Functions ---
+def low_temp(t):
+    if t <= 18: return 1
+    if 18 < t < 25: return (25 - t) / 7
+    return 0
                         
-                    def medium_temp(t):
-                    if 20 < t < 28: return (t - 20) / 8
-                    if 28 <= t <= 35: return (35 - t) / 7
-                    return 0
+def medium_temp(t):
+    if 20 < t < 28: return (t - 20) / 8
+    if 28 <= t <= 35: return (35 - t) / 7
+    return 0
                         
-                    def high_temp(t):
-                    if t <= 28: return 0
-                    if 28 < t < 35: return (t - 28) / 7
-                    if t >= 35: return 1
+def high_temp(t):
+    if t <= 28: return 0
+    if 28 < t < 35: return (t - 28) / 7
+    if t >= 35: return 1
                         
-                    # --- Rule Base ---
-                    # IF temp is LOW → AC SPEED = LOW
-                    # IF temp is MEDIUM → AC SPEED = MEDIUM
-                    # IF temp is HIGH → AC SPEED = HIGH
+# --- Rule Base ---
+# IF temp is LOW → AC SPEED = LOW
+# IF temp is MEDIUM → AC SPEED = MEDIUM
+# IF temp is HIGH → AC SPEED = HIGH
                         
-                    def fuzzy_ac_speed(t):
-                    low = low_temp(t)
-                    medium = medium_temp(t)
-                    high = high_temp(t)
+def fuzzy_ac_speed(t):
+    low = low_temp(t)
+    medium = medium_temp(t)
+    high = high_temp(t)
                         
-                    print("\n--- Fuzzy Membership Values ---")
-                    print(f"Low Temp Membership    = {low:.2f}")
-                    print(f"Medium Temp Membership = {medium:.2f}")
-                    print(f"High Temp Membership   = {high:.2f}")
+print("\n--- Fuzzy Membership Values ---")
+print(f"Low Temp Membership    = {low:.2f}")
+print(f"Medium Temp Membership = {medium:.2f}")
+print(f"High Temp Membership   = {high:.2f}")
                         
-                    # Simple Defuzzification (Winner Takes All)
-                    maximum = max(low, medium, high)
+# Simple Defuzzification (Winner Takes All)
+maximum = max(low, medium, high)
                         
-                    if maximum == low:
-                    return "AC SPEED: LOW"
-                    elif maximum == medium:
-                    return "AC SPEED: MEDIUM"
-                    else:
-                    return "AC SPEED: HIGH"
+if maximum == low:
+    return "AC SPEED: LOW"
+elif maximum == medium:
+    return "AC SPEED: MEDIUM"
+else:
+    return "AC SPEED: HIGH"
                         
-                        
-                    # --- MAIN PROGRAM ---
-                    temp = float(input("Enter Temperature: "))
-                    result = fuzzy_ac_speed(temp)
-                    print("\n>>>", result)</code></pre>
+# --- MAIN PROGRAM ---
+temp = float(input("Enter Temperature: "))
+result = fuzzy_ac_speed(temp)
+print("\n>>>", result)
+                
+                    </code></pre>
                 </div>
             </div>
 
@@ -899,22 +953,24 @@
                 <p>Rule-based system to determine voting eligibility based on various criteria.</p>
                 <div class="code-wrapper">
                     <pre><code>
-                # Voting Eligibility Checker
+# Voting Eligibility Checker
                             
-                # Inputs
-                age = int(input("Enter your age: "))
-                citizenship = input("Are you a resident of India? (yes/no): ").lower()
-                voter_id = input("Do you have a Voter ID? (yes/no): ").lower()
-                education = input("Enter education (primary/high school/graduate): ").lower()
+# Inputs
+age = int(input("Enter your age: "))
+citizenship = input("Are you a resident of India? (yes/no): ").lower()
+voter_id = input("Do you have a Voter ID? (yes/no): ").lower()
+education = input("Enter education (primary/high school/graduate): ").lower()
                             
-                # Eligibility Logic
-                if age >= 18 and citizenship == "yes" and voter_id == "yes" and education in ["high school", "graduate"]:
-                result = "Eligible to Vote"
-                else:
-                result = "Not Eligible to Vote"
+# Eligibility Logic
+if age >= 18 and citizenship == "yes" and voter_id == "yes" and education in ["high school", "graduate"]:
+    result = "Eligible to Vote"
+else:
+    result = "Not Eligible to Vote"
                 
-                print("\n--- Voting Eligibility Result ---")
-                print(result)</code></pre>
+print("\n--- Voting Eligibility Result ---")
+print(result)
+            
+                    </code></pre>
                 </div>
             </div>
 
@@ -924,20 +980,20 @@
                 <p>Simple eligibility checker for engineering college admission based on JEE qualifications.</p>
                 <div class="code-wrapper">
                     <pre><code>
-            # Engineering College Eligibility Checker
-            # Inputs
-            age = int(input("Enter your age: "))
-            jee = input("Have you qualified JEE Mains? (yes/no): ").lower()
-            maths = input("Did you take Mathematics in 12th? (yes/no): ").lower()
+# Engineering College Eligibility Checker
+# Inputs
+age = int(input("Enter your age: "))
+jee = input("Have you qualified JEE Mains? (yes/no): ").lower()
+maths = input("Did you take Mathematics in 12th? (yes/no): ").lower()
             
-            # Eligibility Logic
-            if age >= 18 and jee == "yes" and maths == "yes":
-            result = "Eligible for Government Engineering College"
-            else:
-            result = "Not Eligible"
+# Eligibility Logic
+if age >= 18 and jee == "yes" and maths == "yes":
+    result = "Eligible for Government Engineering College"
+else:
+    result = "Not Eligible"
             
-            print("\n--- Eligibility Result ---")
-            print(result)</code></pre>
+print("\n--- Eligibility Result ---")
+print(result)</code></pre>
                 </div>
             </div>
 
@@ -946,54 +1002,62 @@
                 <p># Fuzzy Air Cooler Speed Control based on Temperature. </p>
                 <div class="code-wrapper">
                     <pre><code>
-                
-                # --- Fuzzy Membership Functions ---
-                
-                def low_temp(t):
-                if t <= 20: return 1
-                if 20 < t < 28: return (28 - t) / 8
-                return 0
-                
-                def medium_temp(t):
-                if 22 < t < 30: return (t - 22) / 8
-                if 30 <= t <= 38: return (38 - t) / 8
-                return 0
-                
-                def high_temp(t):
-                if t <= 30: return 0
-                if 30 < t < 40: return (t - 30) / 10
-                if t >= 40: return 1
-                
-                # --- Rule Base ---
-                # IF temp is LOW → Cooler Speed = LOW
-                # IF temp is MEDIUM → Cooler Speed = MEDIUM
-                # IF temp is HIGH → Cooler Speed = HIGH
-                
-                def fuzzy_cooler_speed(t):
-                low = low_temp(t)
-                medium = medium_temp(t)
-                high = high_temp(t)
-                
-                print("\n--- Fuzzy Membership Values ---")
-                print(f"Low Temp Membership    = {low:.2f}")
-                print(f"Medium Temp Membership = {medium:.2f}")
-                print(f"High Temp Membership   = {high:.2f}")
-                
-                # Simple Defuzzification (Winner Takes All)
-                maximum = max(low, medium, high)
-                
-                if maximum == low:
-                return "COOLER SPEED: LOW"
-                elif maximum == medium:
-                return "COOLER SPEED: MEDIUM"
-                else:
-                return "COOLER SPEED: HIGH"
-                
-                
-                # --- MAIN PROGRAM ---
-                temp = float(input("Enter Temperature: "))
-                result = fuzzy_cooler_speed(temp)
-                print("\n>>>", result)
+# --- Fuzzy Membership Functions ---
+
+def low_temp(t):
+    if t <= 20:
+        return 1
+    if 20 < t < 28:
+        return (28 - t) / 8
+    return 0
+
+def medium_temp(t):
+    if 22 < t < 30:
+        return (t - 22) / 8
+    if 30 <= t <= 38:
+        return (38 - t) / 8
+    return 0
+
+def high_temp(t):
+    if t <= 30:
+        return 0
+    if 30 < t < 40:
+        return (t - 30) / 10
+    if t >= 40:
+        return 1
+
+# --- Rule Base ---
+# IF temp is LOW    → Cooler Speed = LOW
+# IF temp is MEDIUM → Cooler Speed = MEDIUM
+# IF temp is HIGH   → Cooler Speed = HIGH
+
+def fuzzy_cooler_speed(t):
+    low = low_temp(t)
+    medium = medium_temp(t)
+    high = high_temp(t)
+
+    print("\n--- Fuzzy Membership Values ---")
+    print(f"Low Temp Membership    = {low:.2f}")
+    print(f"Medium Temp Membership = {medium:.2f}")
+    print(f"High Temp Membership   = {high:.2f}")
+
+    # Simple Defuzzification (Winner Takes All)
+    maximum = max(low, medium, high)
+
+    if maximum == low:
+        return "COOLER SPEED: LOW"
+    elif maximum == medium:
+        return "COOLER SPEED: MEDIUM"
+    else:
+        return "COOLER SPEED: HIGH"
+
+
+# --- MAIN PROGRAM ---
+temp = float(input("Enter Temperature: "))
+result = fuzzy_cooler_speed(temp)
+print("\n>>>", result)
+
+
             </code></pre>
                 </div>
             </div>
