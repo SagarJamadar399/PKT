@@ -143,6 +143,49 @@
             font-size: 20px;
         }
 
+        .copy-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: #333;
+            color: white;
+            border: none;
+            padding: 6px 10px;
+            font-size: 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: #555;
+        }
+
+        .code-wrapper {
+            position: relative;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #27ae60;
+            color: white;
+            padding: 12px 18px;
+            border-radius: 6px;
+            font-size: 14px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: 0.3s ease;
+            z-index: 9999;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -159,6 +202,7 @@
 </head>
 
 <body>
+    <div id="toast" class="toast">Code Copied!</div>
     <div class="container">
         <div class="sidebar">
             <h2>AI/ML Topics</h2>
@@ -191,7 +235,8 @@
             <div class="code-section" id="fanOnOff">
                 <h1>Smart Home - Fan Control</h1>
                 <p>Simple fuzzy logic system to control fan based on temperature, light intensity, and time of day.</p>
-                <pre><code># Simple Fuzzy Logic Smart Home Agent
+                <div class="code-wrapper">
+                    <pre><code># Simple Fuzzy Logic Smart Home Agent
                     
                     temperature = float(input("Enter temperature: "))
                     light_intensity = float(input("Enter light intensity (0-100): "))
@@ -223,13 +268,15 @@
                 print(f"Temperature Level: {temp_level}")
                 print(f"Fan: {fan}")
                 print(f"Light: {light}")</code></pre>
+                </div>
             </div>
 
             <!-- Topic 2: Heater -->
             <div class="code-section" id="heater">
                 <h1>Smart Home - Heater Control</h1>
                 <p>Intelligent heater control system based on temperature, season, and time of day.</p>
-                <pre><code># Smart Home Agent to control Heater
+                <div class="code-wrapper">
+                    <pre><code># Smart Home Agent to control Heater
                     
                     temperature = float(input("Enter temperature (°C): "))
                     season = input("Enter season (summer/winter/rainy): ").lower()
@@ -243,13 +290,15 @@
                     
                     print("\n--- Smart Home Heater Decision ---")
                     print(f"Heater: {heater}")</code></pre>
+                </div>
             </div>
 
             <!-- Topic 3: A* Algorithm -->
             <div class="code-section" id="astar">
                 <h1>A* Pathfinding Algorithm</h1>
                 <p>A* algorithm for finding the shortest path on a 2D grid with obstacles.</p>
-                <pre><code># astar_grid.py
+                <div class="code-wrapper">
+                    <pre><code># astar_grid.py
                         # A* pathfinding on a 2D grid with obstacles. Returns path as list of (r,c).
                         
                         import heapq
@@ -308,13 +357,15 @@
                         print("Path found:", path)
                         else:
                         print("No path found")</code></pre>
+                </div>
             </div>
 
             <!-- Topic 4: Greedy BFS -->
             <div class="code-section" id="greedy">
                 <h1>Greedy Best-First Search</h1>
                 <p>Greedy Best-First Search algorithm using Manhattan heuristic for pathfinding.</p>
-                <pre><code># greedy_bfs_grid.py
+                <div class="code-wrapper">
+                    <pre><code># greedy_bfs_grid.py
                             # Greedy Best-First Search on a grid using Manhattan heuristic.
                             
                             import heapq
@@ -367,13 +418,15 @@
                             print("Path found by Greedy BFS:", path)
                             else:
                             print("No path found")</code></pre>
+                </div>
             </div>
 
             <!-- Topic 5: N-Queens -->
             <div class="code-section" id="nqueens">
                 <h1>N-Queens Problem</h1>
                 <p>Classic N-Queens problem solved using backtracking algorithm.</p>
-                <pre><code># N-Queens Problem using Backtracking
+                <div class="code-wrapper">
+                    <pre><code># N-Queens Problem using Backtracking
                                 
                                 def is_safe(board, row, col, n):
                                 # Check column
@@ -430,13 +483,15 @@
                                 print_board(solutions[0], n)
                                 else:
                                 print("No solution exists")</code></pre>
+                </div>
             </div>
 
             <!-- Topic 6: Inference Engine -->
             <div class="code-section" id="inference">
                 <h1>Medical Diagnosis System</h1>
                 <p>Knowledge-based inference engine for medical diagnosis based on symptoms.</p>
-                <pre><code># Knowledge Base
+                <div class="code-wrapper">
+                    <pre><code># Knowledge Base
                                     knowledge_base = {
                                         "fever and cough": "Common Cold",
                                         "fever and rash": "Measles",
@@ -472,13 +527,15 @@
                 
                 diagnosis = infer_disease(user_input)
                 print(f"Diagnosis → {diagnosis}\n")</code></pre>
+                </div>
             </div>
 
             <!-- Topic 7: Government Scheme -->
             <div class="code-section" id="govscheme">
                 <h1>Government Scheme Eligibility</h1>
                 <p>Rule-based system to check eligibility for government schemes.</p>
-                <pre><code># Government Scheme Eligibility Checker
+                <div class="code-wrapper">
+                    <pre><code># Government Scheme Eligibility Checker
                     
                     # Inputs
                     age = int(input("Enter age: "))
@@ -499,13 +556,15 @@
                     
                     print("\n--- Eligibility Result ---")
                     print("You are:", result)</code></pre>
+                </div>
             </div>
 
             <!-- Topic 8: Tic-Tac-Toe -->
             <div class="code-section" id="tictactoe">
                 <h1>Tic-Tac-Toe AI</h1>
                 <p>Rule-based AI for playing Tic-Tac-Toe with win and block strategies.</p>
-                <pre><code># Simple Rule-Based Tic-Tac-Toe AI
+                <div class="code-wrapper">
+                    <pre><code># Simple Rule-Based Tic-Tac-Toe AI
                         
                         def print_board(board):
                         print("\nBoard:")
@@ -588,13 +647,15 @@
                             print_board(board)
                             print("DRAW!")
                             break</code></pre>
+                </div>
             </div>
 
             <!-- Topic 9: Fuzzy Fan Speed -->
             <div class="code-section" id="fuzzyfan">
                 <h1>Fuzzy Fan Speed Control</h1>
                 <p>Fuzzy logic system for controlling fan speed based on temperature.</p>
-                <pre><code># Fuzzy Fan Speed Control based on Temperature
+                <div class="code-wrapper">
+                    <pre><code># Fuzzy Fan Speed Control based on Temperature
                                 
                                 def low_temp(t):
                                 if t <= 20: return 1
@@ -641,13 +702,15 @@
                                 temp = float(input("Enter Temperature: "))
                                 result = fuzzy_fan_speed(temp)
                                 print("\n>>>", result)</code></pre>
+                </div>
             </div>
 
             <!-- Topic 10: Genetic Algorithm -->
             <div class="code-section" id="genetic">
                 <h1>Genetic Algorithm</h1>
                 <p>Genetic algorithm for optimization with constraint handling.</p>
-                <pre><code>import random
+                <div class="code-wrapper">
+                    <pre><code>import random
                                     import math
                                     
                                     # --- GA PARAMETERS ---
@@ -723,6 +786,7 @@
                 best = max(population, key=fitness)
                 bx, by = decode(best)
                 print(f"Generation {gen+1}: Best = x={bx}, y={by}, fitness={fitness(best):.4f}")</code></pre>
+                </div>
             </div>
 
             <!-- Topic 11: Covid Heart -->
@@ -730,7 +794,8 @@
                 <h1>Disease Prediction System</h1>
                 <p>Knowledge-based system for predicting diseases including Tuberculosis, Covid-19, and Heart Disease.
                 </p>
-                <pre><code># Simple Knowledge-Based Medical Diagnosis System
+                <div class="code-wrapper">
+                    <pre><code># Simple Knowledge-Based Medical Diagnosis System
                     # Diseases: Tuberculosis, Covid-19, Heart Disease
                     
                     # ---------- KNOWLEDGE BASE ----------
@@ -768,90 +833,98 @@
                     
                     diagnosis = infer_disease(user_in)
                     print(f"Diagnosis → {diagnosis}\n")</code></pre>
+                </div>
             </div>
 
             <!-- Topic 12: Fuzzy AC Speed -->
             <div class="code-section" id="fuzzyac">
                 <h1>Fuzzy AC Speed Control</h1>
                 <p>Fuzzy logic controller for air conditioner speed based on temperature.</p>
-                <pre><code># Fuzzy AC Speed Control based on Temperature
+                <div class="code-wrapper">
+                    <pre><code>
+                    # Fuzzy AC Speed Control based on Temperature
+            
+                    # --- Membership Functions ---
+                    def low_temp(t):
+                    if t <= 18: return 1
+                    if 18 < t < 25: return (25 - t) / 7
+                    return 0
                         
-                        # --- Membership Functions ---
-                        def low_temp(t):
-                        if t <= 18: return 1
-                        if 18 < t < 25: return (25 - t) / 7
-                        return 0
+                    def medium_temp(t):
+                    if 20 < t < 28: return (t - 20) / 8
+                    if 28 <= t <= 35: return (35 - t) / 7
+                    return 0
                         
-                        def medium_temp(t):
-                        if 20 < t < 28: return (t - 20) / 8
-                        if 28 <= t <= 35: return (35 - t) / 7
-                        return 0
+                    def high_temp(t):
+                    if t <= 28: return 0
+                    if 28 < t < 35: return (t - 28) / 7
+                    if t >= 35: return 1
                         
-                        def high_temp(t):
-                        if t <= 28: return 0
-                        if 28 < t < 35: return (t - 28) / 7
-                        if t >= 35: return 1
+                    # --- Rule Base ---
+                    # IF temp is LOW → AC SPEED = LOW
+                    # IF temp is MEDIUM → AC SPEED = MEDIUM
+                    # IF temp is HIGH → AC SPEED = HIGH
                         
-                        # --- Rule Base ---
-                        # IF temp is LOW → AC SPEED = LOW
-                        # IF temp is MEDIUM → AC SPEED = MEDIUM
-                        # IF temp is HIGH → AC SPEED = HIGH
+                    def fuzzy_ac_speed(t):
+                    low = low_temp(t)
+                    medium = medium_temp(t)
+                    high = high_temp(t)
                         
-                        def fuzzy_ac_speed(t):
-                        low = low_temp(t)
-                        medium = medium_temp(t)
-                        high = high_temp(t)
+                    print("\n--- Fuzzy Membership Values ---")
+                    print(f"Low Temp Membership    = {low:.2f}")
+                    print(f"Medium Temp Membership = {medium:.2f}")
+                    print(f"High Temp Membership   = {high:.2f}")
                         
-                        print("\n--- Fuzzy Membership Values ---")
-                        print(f"Low Temp Membership    = {low:.2f}")
-                        print(f"Medium Temp Membership = {medium:.2f}")
-                        print(f"High Temp Membership   = {high:.2f}")
+                    # Simple Defuzzification (Winner Takes All)
+                    maximum = max(low, medium, high)
                         
-                        # Simple Defuzzification (Winner Takes All)
-                        maximum = max(low, medium, high)
-                        
-                        if maximum == low:
-                        return "AC SPEED: LOW"
-                        elif maximum == medium:
-                        return "AC SPEED: MEDIUM"
-                        else:
-                        return "AC SPEED: HIGH"
+                    if maximum == low:
+                    return "AC SPEED: LOW"
+                    elif maximum == medium:
+                    return "AC SPEED: MEDIUM"
+                    else:
+                    return "AC SPEED: HIGH"
                         
                         
-                        # --- MAIN PROGRAM ---
-                        temp = float(input("Enter Temperature: "))
-                        result = fuzzy_ac_speed(temp)
-                        print("\n>>>", result)</code></pre>
+                    # --- MAIN PROGRAM ---
+                    temp = float(input("Enter Temperature: "))
+                    result = fuzzy_ac_speed(temp)
+                    print("\n>>>", result)</code></pre>
+                </div>
             </div>
 
             <!-- Topic 13: Voting -->
             <div class="code-section" id="voting">
                 <h1>Voting Eligibility Checker</h1>
                 <p>Rule-based system to determine voting eligibility based on various criteria.</p>
-                <pre><code># Voting Eligibility Checker
+                <div class="code-wrapper">
+                    <pre><code>
+                # Voting Eligibility Checker
                             
-                            # Inputs
-                            age = int(input("Enter your age: "))
-                            citizenship = input("Are you a resident of India? (yes/no): ").lower()
-                            voter_id = input("Do you have a Voter ID? (yes/no): ").lower()
-                            education = input("Enter education (primary/high school/graduate): ").lower()
+                # Inputs
+                age = int(input("Enter your age: "))
+                citizenship = input("Are you a resident of India? (yes/no): ").lower()
+                voter_id = input("Do you have a Voter ID? (yes/no): ").lower()
+                education = input("Enter education (primary/high school/graduate): ").lower()
                             
-                            # Eligibility Logic
-                            if age >= 18 and citizenship == "yes" and voter_id == "yes" and education in ["high school", "graduate"]:
-                            result = "Eligible to Vote"
-                            else:
-                            result = "Not Eligible to Vote"
-                            
-                            print("\n--- Voting Eligibility Result ---")
-                            print(result)</code></pre>
+                # Eligibility Logic
+                if age >= 18 and citizenship == "yes" and voter_id == "yes" and education in ["high school", "graduate"]:
+                result = "Eligible to Vote"
+                else:
+                result = "Not Eligible to Vote"
+                
+                print("\n--- Voting Eligibility Result ---")
+                print(result)</code></pre>
+                </div>
             </div>
 
             <!-- Topic 14: JEE -->
             <div class="code-section" id="jee">
                 <h1>Engineering College Eligibility</h1>
                 <p>Simple eligibility checker for engineering college admission based on JEE qualifications.</p>
-                <pre><code># Engineering College Eligibility Checker
-
+                <div class="code-wrapper">
+                    <pre><code>
+            # Engineering College Eligibility Checker
             # Inputs
             age = int(input("Enter your age: "))
             jee = input("Have you qualified JEE Mains? (yes/no): ").lower()
@@ -865,12 +938,14 @@
             
             print("\n--- Eligibility Result ---")
             print(result)</code></pre>
+                </div>
             </div>
 
             <div class="code-section" id="fuzzycooler">
                 <h1>Fuzzy Air Cooler</h1>
                 <p># Fuzzy Air Cooler Speed Control based on Temperature. </p>
-                <pre><code>
+                <div class="code-wrapper">
+                    <pre><code>
                 
                 # --- Fuzzy Membership Functions ---
                 
@@ -920,34 +995,136 @@
                 result = fuzzy_cooler_speed(temp)
                 print("\n>>>", result)
             </code></pre>
+                </div>
             </div>
         </div>
     </div>
-</body>
-<script>
-    const items = document.querySelectorAll("#topicList li");
-    const sections = document.querySelectorAll(".code-section");
-    const welcome = document.getElementById("welcome");
+    <script>
 
-    items.forEach(li => {
-        li.addEventListener("click", () => {
-            // Remove active class from all sidebar items
-            items.forEach(el => el.classList.remove("active"));
+        (function () {
 
-            // Add active to clicked item
-            li.classList.add("active");
+            function showToast(message = "Code Copied!") {
+                const toast = document.getElementById("toast");
+                toast.innerText = message;
+                toast.classList.add("show");
 
-            // Hide welcome screen
-            welcome.classList.remove("active");
-            welcome.style.display = "none";
+                setTimeout(() => {
+                    toast.classList.remove("show");
+                }, 1200);
+            }
 
-            // Hide all sections
-            sections.forEach(sec => sec.classList.remove("active"));
+            function safeCopy(text) {
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    return navigator.clipboard.writeText(text);
+                }
+                return new Promise((resolve, reject) => {
+                    try {
+                        const ta = document.createElement("textarea");
+                        ta.value = text;
+                        ta.style.position = "fixed";
+                        ta.style.left = "-9999px";
+                        document.body.appendChild(ta);
+                        ta.select();
+                        const ok = document.execCommand("copy");
+                        document.body.removeChild(ta);
+                        ok ? resolve() : reject("Copy failed");
+                    } catch (err) {
+                        reject(err);
+                    }
+                });
+            }
 
-            // Show selected section
-            const topicId = li.getAttribute("data-topic");
-            document.getElementById(topicId).classList.add("active");
+            // Add copy buttons
+            document.querySelectorAll("pre").forEach(pre => {
+                let wrapper = pre.closest(".code-wrapper");
+
+                if (!wrapper) {
+                    wrapper = document.createElement("div");
+                    wrapper.className = "code-wrapper";
+                    pre.parentNode.insertBefore(wrapper, pre);
+                    wrapper.appendChild(pre);
+                }
+
+                if (!wrapper.querySelector(".copy-btn")) {
+                    const btn = document.createElement("button");
+                    btn.className = "copy-btn";
+                    btn.innerText = "Copy";
+                    wrapper.appendChild(btn);
+
+                    btn.addEventListener("click", async () => {
+                        const codeEl = pre.querySelector("code") || pre;
+                        const text = codeEl.innerText.trim();
+                        await safeCopy(text);
+
+                        btn.innerText = "Copied!";
+                        btn.style.background = "#27ae60";
+                        showToast("Code Copied!");
+
+                        setTimeout(() => {
+                            btn.innerText = "Copy";
+                            btn.style.background = "";
+                        }, 1200);
+                    });
+                }
+            });
+
+            // Auto copy when user opens a topic
+            const items = document.querySelectorAll("#topicList li");
+            const sections = document.querySelectorAll(".code-section");
+            const welcome = document.getElementById("welcome");
+
+            items.forEach(li => {
+                li.addEventListener("click", async () => {
+
+                    items.forEach(el => el.classList.remove("active"));
+                    li.classList.add("active");
+
+                    welcome.style.display = "none";
+
+                    sections.forEach(sec => sec.classList.remove("active"));
+
+                    const topicId = li.getAttribute("data-topic");
+                    const selected = document.getElementById(topicId);
+                    selected.classList.add("active");
+
+                    const pre = selected.querySelector("pre");
+                    if (pre) {
+                        const codeEl = pre.querySelector("code") || pre;
+                        await safeCopy(codeEl.innerText.trim());
+                        showToast("Code Auto-Copied!");
+                    }
+                });
+            });
+
+        })();
+
+
+
+        const items = document.querySelectorAll("#topicList li");
+        const sections = document.querySelectorAll(".code-section");
+        const welcome = document.getElementById("welcome");
+
+        items.forEach(li => {
+            li.addEventListener("click", () => {
+                // Remove active class from all sidebar items
+                items.forEach(el => el.classList.remove("active"));
+
+                // Add active to clicked item
+                li.classList.add("active");
+
+                // Hide welcome screen
+                welcome.classList.remove("active");
+                welcome.style.display = "none";
+
+                // Hide all sections
+                sections.forEach(sec => sec.classList.remove("active"));
+
+                // Show selected section
+                const topicId = li.getAttribute("data-topic");
+                document.getElementById(topicId).classList.add("active");
+            });
         });
-    });
-</script>
+    </script>
+</body>
+
 </html>
