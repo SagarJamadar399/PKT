@@ -198,6 +198,90 @@
             background: #3498db;
             border-radius: 4px;
         }
+
+        /* ----------------- RESPONSIVE ----------------- */
+
+        /* Tablets (width <= 1024px) */
+        @media (max-width: 1024px) {
+            .container {
+                flex-direction: column;
+                max-width: 95%;
+                margin: 10px auto;
+                min-height: auto;
+            }
+
+            .sidebar {
+                width: 100%;
+                display: flex;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+
+            .sidebar ul {
+                display: flex;
+                flex-direction: row;
+            }
+
+            .sidebar li {
+                flex: 1 0 auto;
+                margin: 5px;
+                padding: 10px 15px;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            pre {
+                font-size: 13px;
+            }
+        }
+
+        /* Mobile Devices (width <= 768px) */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                padding: 10px 0;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+
+            .sidebar ul {
+                flex-direction: row;
+                padding-left: 10px;
+            }
+
+            .sidebar li {
+                font-size: 14px;
+                padding: 8px 12px;
+                margin: 5px;
+            }
+
+            .content {
+                padding: 15px;
+            }
+
+            pre {
+                font-size: 12px;
+                padding: 15px;
+            }
+
+            .welcome h1 {
+                font-size: 32px;
+            }
+
+            .welcome p {
+                font-size: 16px;
+            }
+        }
+
+        /* Make code blocks horizontally scrollable on very small screens */
+        pre {
+            white-space: pre-wrap;
+            /* allow wrapping */
+            word-wrap: break-word;
+            /* break long words */
+        }
     </style>
 </head>
 
